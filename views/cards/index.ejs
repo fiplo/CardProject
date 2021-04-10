@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Employee List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h1>bahhh</h1>
+      
+      <h3><a href="/cards/create">Create new card</a></h3>
+      <h1>Cards List</h1>
+      <% if(cards && cards.length>0) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Card Name</th>
+            <th>Image Url</th>
+            <th>Author</th>
+            <th>Number</th>
+            <th>sasa</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <% for(var i=0; i<cards.length;i++) { %>
+            <tr>
+
+              <td><%= cards[i].name%></td>
+              <td><%= cards[i].imageUrl%></td>
+              <td><%= cards[i].author%></td>
+              <td><%= cards[i].number%></td>
+              <td><a href="/cards/remove/<%=cards[i]._id%>" onclick="return confirm('Ar tikrai norite ištrinti šią kortą');">Remove Card</a> </td>
+              <td><a href="/cards/edit/<%=cards[i]._id%>">Edit Card</a> </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <div>No Cards found.</div>
+      <% } %>
+   </div>
+  </body>
+</html>

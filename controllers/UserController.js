@@ -41,7 +41,7 @@ userController.save = function (req, res) {
 };
 
 userController.edit = function (req, res) {
-  user.findOne({_id: req.params.id}).exec(function (err, user) {
+  User.findOne({_id: req.params.id}).exec(function (err, user) {
     if (err) {
       console.log("Error:", err);
     } else {

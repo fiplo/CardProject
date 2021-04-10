@@ -8,12 +8,14 @@ var indexRouter = require("./routes/index");
 var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 var User = require("./models/User");
+var Card = require("./models/Card");
 var usersRouter = require("./routes/users");
+var cardsRouter = require("./routes/cards");
 
 var app = express();
 
 mongoose
-  .connect("mongodb://192.168.80.1/cardproject")
+  .connect("mongodb://localhost/cardproject")
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
@@ -29,6 +31,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/cards", cardsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create User</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/cards">Card List</a></h3>
+      <h1>Edit  Card </h1>
+      <form action="/cards/update/<%= card._id%>" method="post">
+        <table>
+          <tbody>
+            <tr>
+              <td>Name</td>
+              <td><input type="text" value="<% if(typeof card !== 'undefined' && card && card.name) { %><%= card.name%> <% } %>"  name="name" /></td>
+            </tr>
+            <tr>
+              <td>Image Url</td>
+              <td><input type="text" value="<% if(typeof card !== 'undefined' && card && card.imageUrl) { %><%= card.imageUrl%> <% } %>" name="imageUrl"/></td>
+            </tr>
+            <tr>
+              <td>Number</td>
+              <td><input type="text" value="<% if(typeof card !== 'undefined' && card && card.number) { %><%= card.number%> <% } %>" name="number" /></td>
+            </tr>
+            <tr>
+              <td colspan="2"><input type="submit" value="Save" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
