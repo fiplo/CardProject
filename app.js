@@ -15,7 +15,7 @@ var cardsRouter = require("./routes/cards");
 var app = express();
 
 mongoose
-  .connect("mongodb://localhost/cardproject")
+  .connect("mongodb://192.168.56.1/cardproject")
   .then(() => console.log("connection succesful"))
   .catch((err) => console.error(err));
 
