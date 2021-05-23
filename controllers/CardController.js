@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Card = mongoose.model("Card");
+var Comment = mongoose.model("Comment");
 var cardController = {};
 
 //Lists all cards
@@ -9,6 +10,21 @@ cardController.list = function (req, res) {
       console.log("Error: ", err);
     } else {
       res.render("../views/cards/index", { cards: cards });
+    }
+  });
+};
+
+cardsController.show = function (req, res) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(404).send("Invalid ID.");
+  Card.findOne({ _id: req.params.id }).exec(function (err, card) {
+    if (err) console.log("Error");
+    if (!card) {
+      res.redirect("/cards");
+    } else {
+      res.render("../views/cards/show", {
+        card: card,
+      });
     }
   });
 };
@@ -71,6 +87,23 @@ cardController.update = function (req, res) {
       }
     }
   );
+};
+
+cardController.insertCardComment = function (req, res) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(404).send("Invalid ID.");
+  var comment = new Comment({
+    card: req.params.id,
+    text: req.body.text,
+    created_at: Date.now(),
+  });
+  comment.save(function (err) {
+    if (err) {
+      console.log("Error: ", err);
+    } else {
+      res.render("../views/cards/show/" + req.params.id);
+    }
+  });
 };
 
 module.exports = cardController;

@@ -43,6 +43,8 @@ module.exports = function (app, passport, multer) {
     res.redirect("/");
   });
 
+  app.get("/users", function (req, res) {});
+
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next();
 

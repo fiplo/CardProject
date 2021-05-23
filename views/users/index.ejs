@@ -1,34 +1,36 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <title>Employee List</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <%- include('../partial/head.ejs') %>
   </head>
+
   <body>
     <div class="container">
-      <h3><a href="/users/create">Create User</a></h3>
-      <h1>Users List</h1>
-      <% if(users.length>0) { %>
-      <table>
-        <thead>
-          <tr>
-            <th>User Name</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Vartotojai</h1>
+      </div>
+      <hr class="my-4" />
 
-          <% for(var i=0; i<users.length;i++) { %>
-            <tr>
-              <td><a href="/users/show/<%= users[i]._id%>"><%= users[i].name%></a></td>
-              <td><%= users[i].email%></td>
-            </tr>
-          <% } %>
-        </tbody>
-      </table>
-      <% } else { %>
-        <div>No users found.</div>
-      <% } %>
+      <div class="row text-center container">
+        <% users.forEach(function(User) { %>
+        <div class="col-md-6">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <p class="card-text"><strong>Id</strong>: <%= User._id %></p>
+              <p class="card-text">
+                <strong>El. pastas</strong>: <%= User.local.email %>
+              </p>
+              <p class="card-text">
+                <strong>Vartotojo tipas</strong>: <%= User.local.userType %>
+              </p>
+              <% if(user.local.userType === 'Administrator') {%>
+              <a class="card-text" href="editUser/<%= User._id %>">Redaguoti</a>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <hr class="my-4" />
     </div>
   </body>
 </html>

@@ -3,14 +3,28 @@ var User = mongoose.model("User");
 
 var userController = {};
 
+// IF admin, fetches list of ALL users ELSE fetches list of clients.
 userController.list = function (req, res) {
-  User.find({}).exec(function (err, users) {
-    if (err) {
-      console.log("Error:", err);
-    } else {
-      res.render("../views/users/index", { users: users });
-    }
-  });
+  if (req.user.local.userType === "Administrator") {
+    User.find({}).exec(function (err, users) {
+      if (err) {
+        console.log("Error:", err);
+      } else {
+        res.render("../views/users/index", { users: users, user: req.user });
+      }
+    });
+  } else {
+    User.find({ "local.userType": "Client" }).exec(function (err, users) {
+      if (err) {
+        console.log("Error:", err);
+      } else {
+        res.render("../views/users/index", {
+          users: users,
+          user: req.user,
+        });
+      }
+    });
+  }
 };
 
 userController.show = function (req, res) {
@@ -41,7 +55,7 @@ userController.save = function (req, res) {
 };
 
 userController.edit = function (req, res) {
-  User.findOne({_id: req.params.id}).exec(function (err, user) {
+  User.findOne({ _id: req.params.id }).exec(function (err, user) {
     if (err) {
       console.log("Error:", err);
     } else {
