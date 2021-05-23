@@ -1,28 +1,33 @@
 var mongoose = require("mongoose");
 var User = require("../models/User");
 
-module.exports = function (app, passport, multer) {
-  app.get("/", function (req, res, next) {
+module.exports = function (app, passport) {
+  // Main Page
+  app.get("/", function (req, res) {
     res.render("index.ejs");
   });
 
+  //Login Screen
   app.get("/login", function (req, res) {
     res.render("login.ejs", { message: req.flash("loginMessage") });
   });
 
+  //Processing login form
   app.post(
     "/login",
     passport.authenticate("local-login", {
       successRedirect: "/profile",
       failureRedirect: "/login",
-      failureFlash: true,
+      failureFlash: True,
     })
   );
 
+  //Signup
   app.get("/signup", function (req, res) {
-    res.render("signup.ejs", { message: req.flash("signupMessage") });
+    res.render("signup.ejs", { message: req.flash("singupMessage") });
   });
 
+  //Process the signup form
   app.post(
     "/signup",
     passport.authenticate("local-signup", {
@@ -32,16 +37,14 @@ module.exports = function (app, passport, multer) {
     })
   );
 
+  //Profile page
   app.get("/profile", isLoggedIn, function (req, res) {
     res.render("profile.ejs", {
       user: req.user,
     });
   });
 
-  app.get("/logout", function (req, res) {
-    req.logout();
-    res.redirect("/");
-  });
+  app.get("/cards", isLoggedIn, function (req, res) {});
 
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next();
