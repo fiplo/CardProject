@@ -1,25 +1,53 @@
 <!-- views/index.ejs -->
 <!doctype html>
 <html>
+
 <head>
-  <%- include('partial/head.ejs') %>
+    <%- include('partial/head.ejs') %>
 </head>
+
 <body>
-<div class="container">
-  <h1 style="text-align: center;">CardProject</h1>
-  <div class="jumbotron text-center">
-    <h1><span class="fa fa-lock"></span> Prisijungimas</h1>
+    <div class="container">
+        <% if (data) { %>
+            <h1 style="text-align: center;">CardProject</h1>
+            <div class="jumbotron text-center">
+                <h1><span class="fa fa-key"></span> Prisijunges vartotojas
+                    <%= data.email %>
+                </h1>
 
-    <p>Prisijunkite arba Registruokites:</p>
+                <p>Sveiki</p>
 
-    <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Prisijungimas</a>
-    <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Registracija</a>
-  </div>
+                <a href="/profile" class="btn btn-default"><span class="fa fa-id-card-o"></span> Profilis</a>
+                <a href="/logout" class="btn btn-default"><span class="fa fa-remove"></span> Atsijungti</a>
+            </div>
+            <% } else { %>
+                <h1 style="text-align: center;">CardProject</h1>
+                <div class="jumbotron text-center">
+                    <h1><span class="fa fa-lock"></span> Prisijungimas</h1>
 
-</div>
+                    <p>Prisijunkite arba Registruokites:</p>
 
-<div class="container">
+                    <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Prisijungimas</a>
+                    <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Registracija</a>
+                </div>
+                <% } %>
 
-</div>
+
+    </div>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1><span class="	fa fa-folder-open"></span> Kortos</h1>
+
+            <p>Galite peržiūrėti kortų katalogą</p>
+
+            <a href="/cards" class="btn btn-default"><span class="fa fa-user"></span> kortų katalogas</a>
+        </div>
+
+    </div>
+
+    <div class="container">
+
+    </div>
 </body>
+
 </html>

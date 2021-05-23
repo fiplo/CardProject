@@ -1,32 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head>
-      <%- include('../partial/head.ejs') %>
-  </head>
-  <body>
-    <div class="container">
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Kortų katalogas</h1>
-    </div>
 
-    <div class="col-md-4">
-        <% cards.forEach(function(card) {%>
-        <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" src="<%= card.imageUrl %>" width="auto" height="255"
-            preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
-            <div class="card-body">
-                <h3 class="card-text"> <%= card.name %> </h3>
-                <p class="card-text"> <%= card.author %> </p>
-                <button type="button" claass="btn btn-primary" onclick="location.href =
-                                                               '/cards/show/<%= card.id
-                                                               %>'">Komentuoti</button>
-            </div>
+<head>
+    <%- include('../partial/head.ejs') %>
+</head>
+
+<body>
+    <div class="container text-center">
+        <div class="page-header text-center">
+            <h1><span class="fa fa-anchor"></span> Kortų katalogas</h1>
         </div>
-        <% }) %>
-    </div>
-    <hr class="my-4">
+        <% if (role === "Administrator") { %>
+            <button type="button" class="btn btn-success" onclick="location.href ='/cards/create/'">Idėti naują kortą</button>
 
-        <!--
+            <% } %>
+
+    </div>
+    <h1>
+    </h1>
+    <div class="container p-3 my-3">
+        <div class="row">
+            <% cards.forEach(function(card) {%>
+                <div class="col-md-4">
+
+                    <div class="card md-4 shadow-sm">
+                        <img class="card-img-top" src="<%= card.imageUrl %>" width="auto" height="255" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+                        <div class="card-body">
+                            <h3 class="card-text">
+                                <%= card.name %>
+                            </h3>
+                            <p class="card-text">
+                                <%= card.author %>
+                            </p>
+
+                            <button type="button" class="btn btn-success" onclick="location.href ='/cards/show/<%= card.id%>'">Komentuoti</button>
+                            <% if (role === "Administrator") { %>
+                                <button type="button" class="btn btn-success" onclick="location.href ='/cards/edit/<%= card.id%>'">Redaguoti</button>
+                                <% } %>
+                        </div>
+                    </div>
+                </div>
+
+                <% }) %>
+        </div>
+        <hr class="my-4">
+    </div>
+
+</body>
+
+</html>
+<!--
       <h1>Kortų Sąrašas</h1>
 
       <h3><a href="/cards/create">Create new card</a></h3>
@@ -62,6 +85,3 @@
         <div>No Cards found.</div>
       <% } %>
       --!>
-   </div>
-  </body>
-</html>
