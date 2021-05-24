@@ -22,9 +22,10 @@
               <p class="card-text">
                 <strong>Vartotojo tipas</strong>: <%= User.local.userType %>
               </p>
-              <% if(user.local.userType === 'Administrator') {%>
+              <% if(typeof user !== 'undefined'){if(user.local.userType ===
+              'Administrator') {%>
               <a class="card-text" href="editUser/<%= User._id %>">Redaguoti</a>
-              <% } %>
+              <% }} %>
             </div>
           </div>
         </div>

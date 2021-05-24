@@ -1,53 +1,69 @@
 <!-- views/index.ejs -->
-<!doctype html>
+<!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <%- include('partial/head.ejs') %>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <% if (data) { %>
-            <h1 style="text-align: center;">CardProject</h1>
-            <div class="jumbotron text-center">
-                <h1><span class="fa fa-key"></span> Prisijunges vartotojas
-                    <%= data.email %>
-                </h1>
+      <% if (data) { %>
+      <h1 style="text-align: center">CardProject</h1>
+      <div class="jumbotron text-center">
+        <h1>
+          <span class="fa fa-key"></span> Prisijunges vartotojas <%= data.email
+          %>
+        </h1>
 
-                <p>Sveiki</p>
+        <p>Sveiki</p>
 
-                <a href="/profile" class="btn btn-default"><span class="fa fa-id-card-o"></span> Profilis</a>
-                <a href="/logout" class="btn btn-default"><span class="fa fa-remove"></span> Atsijungti</a>
-            </div>
-            <% } else { %>
-                <h1 style="text-align: center;">CardProject</h1>
-                <div class="jumbotron text-center">
-                    <h1><span class="fa fa-lock"></span> Prisijungimas</h1>
+        <a href="/profile" class="btn btn-default"
+          ><span class="fa fa-id-card-o"></span> Profilis</a
+        >
+        <a href="/logout" class="btn btn-default"
+          ><span class="fa fa-remove"></span> Atsijungti</a
+        >
+      </div>
+      <% } else { %>
+      <h1 style="text-align: center">CardProject</h1>
+      <div class="jumbotron text-center">
+        <h1><span class="fa fa-lock"></span> Prisijungimas</h1>
 
-                    <p>Prisijunkite arba Registruokites:</p>
+        <p>Prisijunkite arba Registruokites:</p>
 
-                    <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Prisijungimas</a>
-                    <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Registracija</a>
-                </div>
-                <% } %>
-
-
+        <a href="/login" class="btn btn-default"
+          ><span class="fa fa-user"></span> Prisijungimas</a
+        >
+        <a href="/signup" class="btn btn-default"
+          ><span class="fa fa-user"></span> Registracija</a
+        >
+      </div>
+      <% } %>
     </div>
     <div class="container">
-        <div class="jumbotron text-center">
-            <h1><span class="	fa fa-folder-open"></span> Kortos</h1>
+      <div class="jumbotron text-center">
+        <h1><span class="fa fa-folder-open"></span> Kortos</h1>
 
-            <p>Galite peržiūrėti kortų katalogą</p>
+        <p>Galite peržiūrėti kortų katalogą</p>
 
-            <a href="/cards" class="btn btn-default"><span class="fa fa-user"></span> kortų katalogas</a>
-        </div>
-
+        <a href="/cards" class="btn btn-default"
+          ><span class="fa fa-file"></span> kortų katalogas</a
+        >
+      </div>
     </div>
-
     <div class="container">
+      <div class="jumbotron text-center">
+        <h1><span class="fa fa-folder-open"></span> Vartotojai</h1>
 
+        <p>Galite peržiūrėti vartotojų sąrašą</p>
+
+        <a href="/users" class="btn btn-default"
+          ><span class="fa fa-user"></span> Vartotojų sąrašas
+        </a>
+      </div>
     </div>
-</body>
 
+    <div class="container"></div>
+  </body>
 </html>
+
