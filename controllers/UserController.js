@@ -72,10 +72,10 @@ userController.update = function (req, res) {
     req.params.id,
     {
       $set: {
-        name: req.body.name,
-        description: req.body.description,
-        avatar: req.body.avatar,
-        email: req.body.email,
+        local: {
+          fullname: req.body.name,
+          email: req.body.email,
+        },
       },
     },
     { new: true },

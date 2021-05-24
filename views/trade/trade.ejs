@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partial/head.ejs') %>
+    <script>
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+
+      function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+      }
+
+      function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container text-center">
+      <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span>Kortų keitimas</h1>
+      </div>
+      <div class="page-header text-center">
+        <h2>Savininkas: <%= owner.local.fullname %></h2>
+      </div>
+    </div>
+    <div class="container p-3 my-3">
+      <div class="row">
+        <div
+          class="col-6 d-flex p-2"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        >
+          Jūsų keičiamos kortos
+        </div>
+        <div
+          class="col-6 d-flex p-2"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        >
+          <%=owner.local.fullname %> keičiamos kortos
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <h2>Jūsų turimos kortos:</h2>
+          <% mycards.forEach(function(card) { %>
+          <div
+            id="<%=card._id %>"
+            draggable="true"
+            ondragstart="drag(event)"
+            class="card md-3 shadow-sm"
+            style="
+              padding-top: 10px;
+              padding-bottom: 10px;
+              padding-left: 5px;
+              padding-right: 5px;
+            "
+          >
+            <img
+              class="card-img-top thumb"
+              src="<%= card.card.imageUrl %>"
+              focusable="false"
+              role="img"
+              style="
+                max-width: 50%;
+                width: auto;
+                height: auto;
+                vertical-align: middle;
+              "
+            />
+            <div class="card-body"><%= card.card.name %></div>
+          </div>
+          <% }) %>
+        </div>
+        <div class="col-6">
+          <h2><%= owner.local.fullname %> turimos kortos</h2>
+          <% ownerCards.forEach(function(card) { %>
+          <div
+            id="<%=card._id %>"
+            draggable="true"
+            ondragstart="drag(event)"
+            class="card md-3 shadow-sm"
+            style="
+              padding-top: 10px;
+              padding-bottom: 10px;
+              padding-left: 5px;
+              padding-right: 5px;
+            "
+          >
+            <img
+              class="card-img-top"
+              src="<%= card.card.imageUrl %>"
+              style="
+                max-width: 50%;
+                width: auto;
+                height: auto;
+                vertical-align: middle;
+              "
+              role="img"
+            />
+            <div class="card-body"><%= card.card.name %></div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

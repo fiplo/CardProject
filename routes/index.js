@@ -99,6 +99,37 @@ module.exports = function (app, passport, multer) {
   });
 
   app.get("/trade/:id", isLoggedIn, function (req, res) {
+    PhysCards.find({ owner: req.params.id })
+      .populate("card")
+      .exec(function (err, ownerCards) {
+        if (err) console.log("Error: ", err);
+        else {
+          PhysCards.find({ owner: req.user._id })
+            .populate("card")
+            .exec(function (err, mycards) {
+              if (err) console.log("Error: ", err);
+              else {
+                User.findOne({ _id: req.params.id }).exec(function (
+                  err,
+                  owner
+                ) {
+                  if (err) console.log("Error: ", err);
+                  else {
+                    res.render("../views/trade/trade", {
+                      user: req.user,
+                      mycards: mycards,
+                      owner: owner,
+                      ownerCards: ownerCards,
+                    });
+                  }
+                });
+              }
+            });
+        }
+      });
+  });
+
+  app.get("/trade/:id", isLoggedIn, function (req, res) {
     res.redirect("/");
   });
 

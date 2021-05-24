@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Employee Detail</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <div class="container">
@@ -13,17 +13,12 @@
           <tr>
             <td>Name</td>
             <td>:</td>
-            <td><%= user.name %></td>
+            <td><%= user.local.fullname %></td>
           </tr>
           <tr>
             <td>Email</td>
             <td>:</td>
-            <td><%= user.email%></td>
-          </tr>
-          <tr>
-            <td>Description</td>
-            <td>:</td>
-            <td><%= user.description %></td>
+            <td><%= user.local.email%></td>
           </tr>
         </tbody>
       </table>
@@ -34,3 +29,4 @@
     </div>
   </body>
 </html>
+

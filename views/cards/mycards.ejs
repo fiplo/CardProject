@@ -16,14 +16,11 @@
                 <h2>Savininkas: <%= owner.local.fullname %></h2>
             </div>
         <% }%>
-        <% if (role === "Administrator" && !private) { %>
-            <button type="button" class="btn btn-success" onclick="location.href ='/cards/create/'">Idėti naują kortą</button>
 
-            <% } %>
-
+              <a class="card-text" href="/trade/<%= owner._id %>"
+                >Keistis kortomis</a
+              >
     </div>
-    <h1>
-    </h1>
     <div class="container p-3 my-3">
         <div class="row">
             <% cards.forEach(function(card) {%>
@@ -47,12 +44,9 @@
                             <button type="button" class="btn btn-success"
                                 onclick="location.href ='/cards/comment/<%= card.card._id %>'">Komentuoti</button>
                             <% } %>
-                            <% if (role === "Administrator" && !private) { %>
-                                <button type="button" class="btn btn-success" onclick="location.href ='/cards/edit/<%= card.id%>'">Redaguoti</button>
-                                <% } %>
-                            <% if (role === "Client" && !private) { %>
-                                <button class="btn btn-warning" type="button" onclick="location.href='/cards/take/<%= card._id %>'">Pasiimti</button>
-                            <% } %>
+
+
+
                         </div>
                     </div>
                 </div>

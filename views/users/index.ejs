@@ -7,6 +7,13 @@
     <div class="container">
       <div class="page-header text-center">
         <h1><span class="fa fa-anchor"></span> Vartotojai</h1>
+        <button
+          class="btn btn-secondary"
+          onclick="location.href = '/'"
+          type="submit"
+        >
+          Gryžti atgal į pagrindinį puslapį
+        </button>
       </div>
       <hr class="my-4" />
 
@@ -24,13 +31,14 @@
               </p>
               <% if(typeof user !== 'undefined'){if(user.local.userType ===
               'Administrator') {%>
-              <a class="card-text" href="editUser/<%= User._id %>">Redaguoti</a>
-              <% }} else { %>
+              <a class="card-text" href="/users/edit/<%= User._id %>"
+                >Redaguoti</a
+              >
+              <% }}%>
 
               <a class="card-text" href="/usercards/<%= User._id %>"
                 >Peržiūrėti kortas</a
               >
-              <% } %>
             </div>
           </div>
         </div>
