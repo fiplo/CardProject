@@ -1,11 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Employee List</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <%- include('../partial/head.ejs') %>
   </head>
   <body>
-    <h3>korta isirase sekmingai</h3>
-      
+    <div class="container">
+      <h1><span class="fa fa-info"></span> Kortos informacija</h1>
+
+      <div class="row justify-content-end">
+        <button
+          class="btn btn-warning btn-lg"
+          type="button"
+          onclick="location.href = '/cards/';"
+        >
+          Atgal
+        </button>
+      </div>
+      <div class="row">
+        <div class="col">
+          <img
+            src="<%= card.imageUrl %>"
+            class="img-fluid"
+            alt="Responsive image"
+          />
+        </div>
+        <div class="col">
+          <div class="row">
+            <h2><%= card.name %></h2>
+          </div>
+          <hr class="my-4" />
+          <h3>Komentarai</h3>
+          <% comments.forEach(function(comment) {%>
+          <div class="row">
+            <h4>
+              <span class="fa fa-comment"></span>
+              <%=comment.created_at.toDateString() %>
+            </h4>
+          </div>
+
+          <div class="row justify-content-end">
+            <p><%=comment.commenttext %></p>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+      <hr class="my-4" />
+    </div>
   </body>
 </html>
