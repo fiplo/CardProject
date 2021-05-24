@@ -18,13 +18,13 @@ userController.list = function (req, res) {
       });
     }
   }
-  console.log("no user");
   User.find({ "local.userType": "Client" }).exec(function (err, users) {
     if (err) {
       console.log("Error:", err);
     } else {
       res.render("../views/users/index", {
         users: users,
+        user: req.user,
       });
     }
   });

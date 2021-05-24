@@ -1,6 +1,8 @@
 var mongoose = require("mongoose");
 var User = require("../models/User");
 var PhysCards = require("../models/PhysicalCard");
+var Trade = require("../models/Trade");
+var TradeCard = require("../models/TradeCard");
 
 module.exports = function (app, passport, multer) {
   app.get("/", function (req, res, next) {
@@ -50,15 +52,54 @@ module.exports = function (app, passport, multer) {
         if (err) {
           console.log("Error: ", err);
         } else {
-          console.log(cards);
           res.render("../views/cards/mycards", {
             user: req.user,
+            owner: req.user,
             cards: cards,
             private: true,
             role: req.user.local.userType,
           });
         }
       });
+  });
+
+  app.get("/usercards/:id", function (req, res) {
+    PhysCards.find({ owner: req.params.id })
+      .populate("card")
+      .exec(function (err, cards) {
+        if (err) {
+          console.log("Error: ", err);
+        } else {
+          User.findOne({ _id: req.params.id }).exec(function (err, owner) {
+            if (err) {
+              console.log("Error: ", err);
+            } else {
+              if (typeof req.user !== "undefined") {
+                res.render("../views/cards/mycards", {
+                  user: req.user,
+                  cards: cards,
+                  owner: owner,
+                  private: false,
+                  role: req.user.local.userType,
+                });
+              } else {
+                console.log(owner);
+                res.render("../views/cards/mycards", {
+                  user: NaN,
+                  cards: cards,
+                  owner: owner,
+                  private: false,
+                  role: NaN,
+                });
+              }
+            }
+          });
+        }
+      });
+  });
+
+  app.get("/trade/:id", isLoggedIn, function (req, res) {
+    res.redirect("/");
   });
 
   app.get("/logout", function (req, res) {

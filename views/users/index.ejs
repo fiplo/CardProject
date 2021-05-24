@@ -25,7 +25,12 @@
               <% if(typeof user !== 'undefined'){if(user.local.userType ===
               'Administrator') {%>
               <a class="card-text" href="editUser/<%= User._id %>">Redaguoti</a>
-              <% }} %>
+              <% }} else { %>
+
+              <a class="card-text" href="/usercards/<%= User._id %>"
+                >Peržiūrėti kortas</a
+              >
+              <% } %>
             </div>
           </div>
         </div>
