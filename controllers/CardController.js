@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var Card = mongoose.model("Card");
 var Comment = mongoose.model("Comment");
+var PhysCard = mongoose.model("PhysicalCard");
 var cardController = {};
 
 //Lists all cards
@@ -13,12 +14,14 @@ cardController.list = function (req, res) {
         res.render("../views/cards/index", {
           cards: cards,
           role: req.user.local.userType,
+          private: false,
         });
       }
     } else {
       res.render("../views/cards/index", {
         cards: cards,
         role: "None",
+        private: false,
       });
     }
   });
@@ -91,7 +94,7 @@ cardController.update = function (req, res) {
       },
     },
     { new: true },
-    function (err, user) {
+    function (err, card) {
       if (err) {
         console.log(err);
         res.render("../views/cards/create", { card: req.body });
@@ -118,7 +121,6 @@ cardController.postComment = function (req, res) {
 cardController.insertCardComment = function (req, res) {
   if (!mongoose.Types.ObjectId.isValid(req.params.id))
     return res.status(404).send("Invalid ID.");
-  console.log(req.body);
   var comment = new Comment({
     card: req.params.id,
     commenttext: req.body.commenttext,
@@ -133,5 +135,20 @@ cardController.insertCardComment = function (req, res) {
   });
 };
 
-module.exports = cardController;
+cardController.take = function (req, res) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(404).send("Invalid ID.");
+  var physcard = new PhysCard({
+    card: req.params.id,
+    owner: req.user._id,
+  });
+  physcard.save(function (err) {
+    if (err) {
+      console.log("Error: ", err);
+    } else {
+      res.redirect("/cards");
+    }
+  });
+};
 
+module.exports = cardController;

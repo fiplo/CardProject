@@ -24,20 +24,21 @@
                 <div class="col-md-4">
 
                     <div class="card md-4 shadow-sm">
-                        <img class="card-img-top" src="<%= card.imageUrl %>" width="auto"
+                        <img class="card-img-top" src="<%= card.card.imageUrl %>" width="auto"
                         max-height="255" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
                         <div class="card-body">
                             <h3 class="card-text">
-                                <%= card.name %>
+                                <%= card.card.name %>
                             </h3>
                             <p class="card-text">
-                                <%= card.author %>
+                            <strong>Kokybė</strong>: <%= card.condition %>
                             </p>
+                            <p class="card-text"><strong>Aprašas:</strong><%= card.desc %></p>
                             <p class="card-text">
-                            <a href="/cards/show/<%= card.id %>">Atidaryti kortos puslapį</a>
+                            <a href="/cards/show/<%= card.card.id %>">Atidaryti kortos puslapį</a>
                             </p>
                             <button type="button" class="btn btn-success"
-                                onclick="location.href ='/cards/comment/<%= card._id %>'">Komentuoti</button>
+                                onclick="location.href ='/cards/comment/<%= card.card._id %>'">Komentuoti</button>
                             <% if (role === "Administrator" && !private) { %>
                                 <button type="button" class="btn btn-success" onclick="location.href ='/cards/edit/<%= card.id%>'">Redaguoti</button>
                                 <% } %>

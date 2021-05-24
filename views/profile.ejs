@@ -35,14 +35,26 @@
             </div>
           </div>
         </div>
-        <% if(user.local.userType === 'Administrator') {%>
+        <% if(user.local.userType === 'Client') {%>
+        <div class="col-sm-6">
+          <div class="card mb-4 shadow-sm text-center">
+            <div class="well">
+              <h3><span class="fa fa-file"></span> Mano Kortos</h3>
+              <p>
+                <strong><a href="/mycards">Spaustelėkite čia</a></strong>
+                <br />
+              </p>
+            </div>
+          </div>
+        </div>
+        <% } %> <% if(user.local.userType === 'Administrator') {%>
         <div class="col-sm-6">
           <div class="card mb-4 shadow-sm text-center">
             <div class="well">
               <h3><span class="fa fa-inbox"></span> Kortų registravimas</h3>
               <p>
-                <strong><a href="/cards/create">Spustelėkite čia</a></strong
-                ><br />
+                <strong><a href="/cards/create">Spustelėkite čia</a></strong>
+                <br />
               </p>
             </div>
           </div>

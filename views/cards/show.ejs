@@ -5,16 +5,30 @@
   </head>
   <body>
     <div class="container">
-      <h1><span class="fa fa-info"></span> Kortos informacija</h1>
-
       <div class="row justify-content-end">
-        <button
-          class="btn btn-warning btn-lg"
-          type="button"
-          onclick="location.href = '/cards/';"
-        >
-          Atgal
-        </button>
+        <div class="col-6">
+          <h1><span class="fa fa-info"></span> Kortos informacija</h1>
+        </div>
+
+        <div class="col">
+          <button
+            class="btn btn-warning btn-lg"
+            type="button"
+            onclick="location.href = '/cards/';"
+          >
+            Kortų Katalogas
+          </button>
+        </div>
+        .
+        <div class="col">
+          <button
+            class="btn btn-secondary btn-lg"
+            type="button"
+            onclick="location.href = '/cards/comment/<%= card._id %>'"
+          >
+            Komentuoti
+          </button>
+        </div>
       </div>
       <div class="row">
         <div class="col">
